@@ -24,28 +24,38 @@ const Calendar = () => {
 
   const onNextWeekHandler = () => {
     setCurrentDate((prevState) => {
-      window.prevState = prevState;
       return new Date(prevState.getTime() + 7 * 24 * 60 * 60 * 1000);
     });
   };
 
   const startEditingHandler = () => {
+    console.log("here2")
     setIsEditing(true);
   }
 
   const finishEditingHandler = () => {
+    console.log("here")
     setIsEditing(false);
+  }
+
+  const submitEditsHandler = (values) => {
+    console.log(values);
+    console.log("submitted edits");
+    // todo: need to pass this into day component
   }
 
   return (
     <div>
       <Week date={currentDate}></Week>
-      {isEditing && <Edit onAddOrCancelEdit={finishEditingHandler}></Edit>}
+      {isEditing && <Edit onSaveEdits={submitEditsHandler} onSaveOrCancelEdit={finishEditingHandler}></Edit>}
       {!isEditing && (
-        <div onClick={startEditingHandler}>
+        <div>
           {daysOfTheWeek.map((day) => {
-            return <Day isEditingHandler={isEditing} DayOfWeek={day}></Day>;
+            return <Day key={day} DayOfWeek={day} onClick={startEditingHandler}></Day>;
           })}
+          {/* 
+          todo: need to consider how days will work when switching weeks
+          */}
           <div>
             <button onClick={onPreviousWeekHandler}>Previous Week</button>
             <button onClick={onNextWeekHandler}>Next Week</button>
