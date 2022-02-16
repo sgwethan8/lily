@@ -29,12 +29,10 @@ const Calendar = () => {
   };
 
   const startEditingHandler = () => {
-    console.log("here2")
     setIsEditing(true);
   }
 
   const finishEditingHandler = () => {
-    console.log("here")
     setIsEditing(false);
   }
 
@@ -50,8 +48,8 @@ const Calendar = () => {
       {isEditing && <Edit onSaveEdits={submitEditsHandler} onSaveOrCancelEdit={finishEditingHandler}></Edit>}
       {!isEditing && (
         <div>
-          {daysOfTheWeek.map((day) => {
-            return <Day key={day} DayOfWeek={day} onClick={startEditingHandler}></Day>;
+          {daysOfTheWeek.map((day, index) => {
+            return <Day key={day} DayOfWeek={day} DayNo={0} onClick={startEditingHandler}></Day>;
           })}
           {/* 
           todo: need to consider how days will work when switching weeks

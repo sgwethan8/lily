@@ -4,10 +4,10 @@ import "./Day.css";
 
 const Day = (props) => {
 
-    
+
   return (
     <div className="card">
-      <h3>{props.DayOfWeek}</h3>
+      <h3>{props.DayOfWeek} {props.DayNo}</h3>
       <p> Content to go here</p>
     </div>
   );
