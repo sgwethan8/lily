@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Calendar from "./components/calendar";
+import Calendar from "./components/Calendar";
 
 import logo from "./lily.png";
 import "./App.css";
@@ -18,7 +18,7 @@ function App() {
     const timer = setInterval(() => {
       setText((prevText) => {
         var index = texts.indexOf(prevText);
-        return (index + 1 == texts.length) ? texts[0] : texts[index + 1] ;
+        return (index + 1 === texts.length) ? texts[0] : texts[index + 1] ;
       });
     }, 2000);
     // clearing interval
