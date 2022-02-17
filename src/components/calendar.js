@@ -6,6 +6,7 @@ import Edit from "./Day/Edit";
 const Calendar = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
   const daysOfTheWeek = [
     "Monday",
     "Tuesday",
@@ -28,38 +29,54 @@ const Calendar = () => {
     });
   };
 
+  const getStartDay = (monday) => {
+    setStartDate((prevState) => {
+      window.monday = monday
+      console.log(monday)
+      return monday
+    });
+  };
+
   const startEditingHandler = () => {
     setIsEditing(true);
-  }
+  };
 
   const finishEditingHandler = () => {
     setIsEditing(false);
-  }
+  };
 
   const submitEditsHandler = (values) => {
     console.log(values);
     console.log("submitted edits");
     // todo: need to pass this into day component
-  }
+  };
 
   return (
     <div>
-      <Week date={currentDate}></Week>
-      {isEditing && <Edit onSaveEdits={submitEditsHandler} onSaveOrCancelEdit={finishEditingHandler}></Edit>}
+      <Week date={currentDate} startDay={getStartDay}></Week>
+      {isEditing && (
+        <Edit
+          onSaveEdits={submitEditsHandler}
+          onSaveOrCancelEdit={finishEditingHandler}
+        ></Edit>
+      )}
       {!isEditing && (
         <div>
-          {daysOfTheWeek.map((day, index) => {
-            return <Day key={day} DayOfWeek={day} DayNo={0} onClick={startEditingHandler}></Day>;
-          })}
-          {/* 
-          todo: need to consider how days will work when switching weeks
-          */}
+          <div onClick={startEditingHandler}>
+            {daysOfTheWeek.map((day, index) => {
+              return <Day key={day} DayOfWeek={day} date={new Date(startDate.getTime() + index * 24 * 60 * 60 * 1000)}></Day>;
+            })}
+          </div>
+          
           <div>
             <button onClick={onPreviousWeekHandler}>Previous Week</button>
             <button onClick={onNextWeekHandler}>Next Week</button>
           </div>
         </div>
       )}
+      {/* 
+          todo: need to consider how days will work when switching weeks
+          */}
     </div>
   );
 };

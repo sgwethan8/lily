@@ -14,16 +14,17 @@ function App() {
     setIsEntered(true);
   };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setText((prevText) => {
-        var index = texts.indexOf(prevText);
-        return (index + 1 === texts.length) ? texts[0] : texts[index + 1] ;
-      });
-    }, 2000);
-    // clearing interval
-    return () => clearInterval(timer);
-  });
+  // NOTE: this is causing the prop function in week to run every 2 seconds, paused for investigation
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setText((prevText) => {
+  //       var index = texts.indexOf(prevText);
+  //       return (index + 1 === texts.length) ? texts[0] : texts[index + 1] ;
+  //     });
+  //   }, 2000);
+  //   // clearing interval
+  //   return () => clearInterval(timer);
+  // });
 
   return (
     <div className="App">
