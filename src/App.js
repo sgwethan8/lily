@@ -4,28 +4,30 @@ import Calendar from "./components/Calendar";
 
 import logo from "./lily.png";
 import "./App.css";
+import jsonData from "./data/shifts.json";
 
 function App() {
   const [isEntered, setIsEntered] = useState(false);
   const [text, setText] = useState("Creating days..");
   const texts = ["Creating days..", "Inputting shifts..", "Quitting job.."];
+  const [data, setJsonData] = useState(jsonData);
 
   const openCalendarview = () => {
     setIsEntered(true);
   };
 
-  // NOTE: this is causing the prop function in week to run every 2 seconds, paused for investigation
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setText((prevText) => {
-  //       var index = texts.indexOf(prevText);
-  //       return (index + 1 === texts.length) ? texts[0] : texts[index + 1] ;
-  //     });
-  //   }, 2000);
-  //   // clearing interval
-  //   return () => clearInterval(timer);
-  // });
+  const onJsonDataUpdateHandler = (updatedJsonData) => {
+    console.log("json data handler in app.js");
+    console.log(updatedJsonData);
+    setJsonData((prevData) => {
+      return updatedJsonData;
+    });
+  };
 
+  // TODO: persist data back to json via express api
+
+  // TODO: fix issue with calendar being rendered twice
+  console.log(data);
   return (
     <div className="App">
       {!isEntered ? (
@@ -35,7 +37,7 @@ function App() {
           <button onClick={openCalendarview}> Enter </button>
         </div>
       ) : (
-        <Calendar></Calendar>
+        <Calendar data={data} onDataUpdate={onJsonDataUpdateHandler}></Calendar>
       )}
     </div>
   );
