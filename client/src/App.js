@@ -60,12 +60,14 @@ function App() {
 
   // TODO: fix issue with calendar being rendered twice
   return (
-    <div className="App">
+    <div className="flex bg-bg_default grid place-items-center h-screen">
       {!isEntered ? (
-        <div className="App-header">
+        <div className="place-items-center">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>{text}</h2>
-          <button onClick={openCalendarview}> Enter </button>
+          <h2 className="pb-6 text-white text-3xl font-bold text-center" >{text}</h2>
+          <div className="pt-6 pb-6 flex place-items-center content-center">
+          <button className="grow h-10 text-lg place-items-center bg-white text-btn_default hover:bg-btn_hover" onClick={openCalendarview}> Enter </button>
+          </div>
         </div>
       ) : (
         <Calendar data={data} onDataUpdate={onJsonDataUpdateHandler}></Calendar>

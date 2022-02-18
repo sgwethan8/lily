@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Day from "./Day/Day";
 
-import "./Week.css";
-
 const Week = (props) => {
   // const [isEditing, setIsEditing] = useState(false);
   const daysOfTheWeek = [
@@ -29,29 +27,33 @@ const Week = (props) => {
 
   const onWeekDataUpdate = (updatedJsonData) => {
     props.onDataUpdate(updatedJsonData);
-  } 
+  };
 
   return (
     <div>
-      <p>
-        {" "}
-        Start date: {monday.toDateString()} End date: {sunday.toDateString()}{" "}
-      </p>
-      <div>
+      <div className="pb-3 pt-3 bg-cd_default ">
+        <p className="text-btn_default text-lg">
+          {" "}
+          Start date: {monday.toDateString()} End date: {sunday.toDateString()}{" "}
+        </p>
+      </div>
+      <div className="pt-6">
         {daysOfTheWeek.map((day, index) => {
           return (
             <Day
               key={`${day} ${props.startDate.getTime()}`}
               DayOfWeek={day}
-              date={new Date(props.startDate.getTime() + index * 24 * 60 * 60 * 1000)}
+              date={
+                new Date(
+                  props.startDate.getTime() + index * 24 * 60 * 60 * 1000
+                )
+              }
               shiftTimes={props.data}
               onDataUpdate={onWeekDataUpdate}
             ></Day>
           );
         })}
       </div>
-
-      
     </div>
   );
 };
