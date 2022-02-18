@@ -9,17 +9,7 @@ function App() {
   const texts = ["Creating days..", "Inputting shifts..", "Quitting job.."];
   const [data, setJsonData] = useState("");
 
-  const openCalendarview = () => {
-    setIsEntered(true);
-  };
-
-  const onJsonDataUpdateHandler = (updatedJsonData) => {
-    setJsonData((prevData) => {
-      return updatedJsonData;
-    });
-  };
-
-  useEffect(() => {
+  const fetchJsonData = () => {
     const RequestOptions = {
       // mode: "no-cors",
       method: "GET",
@@ -29,18 +19,45 @@ function App() {
     fetch("http://localhost:3002/shifts", RequestOptions).then((response) => {
       if (response.ok) {
         response.json().then((json) => {
-          setJsonData(json);
+          setJsonData((prevData) => {
+              return json;
+            });
         });
       }
     });
+  }
+
+  const postJsonData = (jsonData) => {
+    const RequestOptions = {
+      // mode: "no-cors",
+      method: "POST",
+      body: JSON.stringify(jsonData),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    // post data to api
+    fetch("http://localhost:3002/shifts", RequestOptions).then((response) => {
+      if (response.ok) {
+        // retrieve updated data from api
+        fetchJsonData();
+      }
+    });
+  }
+
+  useEffect(() => {
+    fetchJsonData();
   }, []);
 
+  const openCalendarview = () => {
+    setIsEntered(true);
+  };
+
   // TODO: persist data back to json via express api
+  const onJsonDataUpdateHandler = (updatedJsonData) => {
+    // Write to back to json file
+    postJsonData(updatedJsonData);
+  };
 
-
-
-
-  
   // TODO: fix issue with calendar being rendered twice
   return (
     <div className="App">
