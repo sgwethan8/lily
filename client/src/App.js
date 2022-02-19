@@ -6,9 +6,12 @@ import "./App.css";
 function App() {
   const [isEntered, setIsEntered] = useState(false);
   const [text, setText] = useState("Creating days..");
-  const texts = ["Creating days..", "Inputting shifts..", "Quitting job.."];
+  const texts = ["Creating days..", "Inputting shifts..", "Quitting job..", "Boarding the cruise ship..", "Entering paradise.."];
   const [data, setJsonData] = useState("");
 
+  // TODO:
+  // [] Handling for when api is not running
+  
   const fetchJsonData = () => {
     const RequestOptions = {
       // mode: "no-cors",

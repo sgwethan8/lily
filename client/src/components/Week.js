@@ -30,11 +30,11 @@ const Week = (props) => {
   };
 
   return (
-    <div>
-      <div className="pb-3 pt-3 bg-cd_default ">
-        <p className="text-btn_default text-lg">
+    <div className="w-96">
+      <div className="mt-5 p-3 bg-cd_default rounded-xl">
+        <p className="text-btn_default text-lg text-center font-semibold">
           {" "}
-          Start date: {monday.toDateString()} End date: {sunday.toDateString()}{" "}
+          {monday.toDateString()} - {sunday.toDateString()}{" "}
         </p>
       </div>
       <div className="pt-6">

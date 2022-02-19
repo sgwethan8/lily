@@ -32,7 +32,7 @@ const Day = (props) => {
   }, [props.shiftTimes]);
 
   return (
-    <div>
+    <div className="p-3 mb-3 bg-cd_default rounded-xl">
       {isEditing && (
         <Edit
           onSaveEdits={submitEditsHandler}
@@ -41,16 +41,21 @@ const Day = (props) => {
       )}
       {!isEditing && (
         <div className="card" onClick={startEditingHandler}>
-          <h3>
+          <h3 className="font-semibold pl-2">
             {props.DayOfWeek} {dayNo} {month}{" "}
           </h3>
           {isDataAvailable && (
-            <div>
-              <p> Start Time: { props.shiftTimes[props.date.toLocaleDateString()][0] } </p>
-              <p> End Time: { props.shiftTimes[props.date.toLocaleDateString()][1] } </p>
+            <div className="flex p-2">
+              <div className="flex grid grid-cols-1 gap-1 bg-wk_default">
+                <p> {props.shiftTimes[props.date.toLocaleDateString()][0]} </p>
+                <p> {props.shiftTimes[props.date.toLocaleDateString()][1]} </p>
+              </div>
+              <div className="justify-center text-center align-middle pl-2">
+                <p> this is the shift </p>
+              </div>
             </div>
           )}
-          {!isDataAvailable && <p> No data available </p>}
+          {!isDataAvailable && <p className="pl-2"> No shifts logged. Lily might be off! </p>}
         </div>
       )}
     </div>
