@@ -11,6 +11,8 @@ function App() {
 
   // TODO:
   // [] Handling for when api is not running
+  // [] Persist data into form
+  // [] Future handling: Add multiple shifts in one day?
   
   const fetchJsonData = () => {
     const RequestOptions = {
@@ -55,7 +57,6 @@ function App() {
     setIsEntered(true);
   };
 
-  // TODO: persist data back to json via express api
   const onJsonDataUpdateHandler = (updatedJsonData) => {
     // Write to back to json file
     postJsonData(updatedJsonData);
