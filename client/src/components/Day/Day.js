@@ -34,7 +34,7 @@ const Day = (props) => {
   }, [props.shiftTimes]);
 
   return (
-    <div className="p-3 mb-3 bg-cd_default rounded-xl">
+    <div className="p-3 mb-3 bg-cd_default hover:bg-cd_hover rounded-xl">
       {isEditing && (
         <Edit
           onSaveEdits={submitEditsHandler}
